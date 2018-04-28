@@ -108,18 +108,13 @@ class World {
     int width;
     int heigth;
     vector <Monster> monsters;
-    
-    int MAX_MN = 100;
     World(string _name, int _width, int _heigth) :
     name(_name), width(_width), heigth(_heigth) {
-      monsters.reserve(MAX_MN);
+      //empty
     }
 
-    Monster* addMonster(Monster m) {
-      if(monsters.size() > MAX_MN ) return nullptr;
-
+    void addMonster(Monster m) {
       monsters.push_back(m);
-      return &monsters.back();
     }   
 
     void print() {
@@ -147,10 +142,8 @@ class World {
 int main() {
   srand(time(NULL));
   World world("Narina", 10, 5);
-  
-  Monster m2(world, "Giuorgiuo", 4, 4, 30, 35, 0.2);
-  Monster* m1 = world.addMonster(Monster (world, "Charmender", 0, 0, 100, 10, 0.02));
-  world.addMonster(m2);
+  world.addMonster(Monster (world, "Charmender", 0, 0, 100, 10, 0.02));
+  world.addMonster(Monster (world, "Giuorgiuo", 4, 4, 30, 35, 0.2));
 
   while (true) {
     world.print();
@@ -159,19 +152,19 @@ int main() {
     cin >> input;
     switch(input) {
       case 'w': {
-        m1 -> move(NORD);
+        world.monsters[0].move(NORD);
         break;
       }
       case 'a': {
-        m1 -> move(OVEST);
+        world.monsters[0].move(OVEST);
         break;
       }
       case 's': {
-        m1 -> move(SUD);
+        world.monsters[0].move(SUD);
         break;
       }
       case 'd': {
-        m1 -> move(EST);
+        world.monsters[0].move(EST);
         break;
       }
     }
